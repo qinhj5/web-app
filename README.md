@@ -43,7 +43,7 @@
 
 5. 下载源码
    ```bash
-   git clone https://github.com/qinhj5/WebRepo
+   git clone https://github.com/qinhj5/WebRepo.git
    cd WebRepo
    ```
 
