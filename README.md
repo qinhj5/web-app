@@ -51,11 +51,11 @@
    ```bash
    python3 -m venv venv
    source venv/bin/activate
-   pip install -r requirements.txt
+   pip3 install -r requirements.txt
    ```
 
 
-7. 编辑配置和初始化数据库
+7. 编辑配置文件和初始化数据库
    ```bash
    vim config.json
    python3 cli.py --func create
@@ -65,5 +65,5 @@
 
 8. 运行服务
    ```bash
-   ./run_live.sh
+   sudo sh ./run_live.sh
    ```
