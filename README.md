@@ -47,8 +47,10 @@
    cd WebRepo
    ```
 
-6. 安装依赖
+6. 创建虚拟环境和安装依赖
    ```bash
+   python3 -m venv venv
+   source venv/bin/activate
    pip install -r requirements.txt
    ```
 
