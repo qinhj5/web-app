@@ -1,0 +1,10 @@
+{
+  "SECRET_KEY": "fb01009d-8a7c-4a49-aded-a26128140ba0",
+  "SQLALCHEMY_DATABASE": {
+    "ip": "localhost",
+    "port": 3306,
+    "user": "root",
+    "pwd": "root1234",
+    "db": "flask_test_db"
+  }
+}
