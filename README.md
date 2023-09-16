@@ -41,7 +41,7 @@
    ```
 
 
-5. 下载源码
+5. 下载源码并进入项目目录
    ```bash
    git clone https://github.com/qinhj5/WebRepo.git
    cd WebRepo
