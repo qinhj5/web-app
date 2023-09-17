@@ -12,17 +12,17 @@
 
    使用Homebrew包管理器，在服务器上安装Python、MySQL和Git。以下是安装命令：
    ```bash
-      # 安装Homebrew（如果尚未安装）
-      /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-      
-      # 安装Python3.10
-      brew install python@3.10
-      
-      # 安装MySQL
-      brew install mysql
-      
-      # 安装Git
-      brew install git
+   # 安装Homebrew（如果尚未安装）
+   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+   
+   # 安装Python3.10
+   brew install python@3.10
+   
+   # 安装MySQL
+   brew install mysql
+   
+   # 安装Git
+   brew install git
    ```
 
 4. 配置MySQL
