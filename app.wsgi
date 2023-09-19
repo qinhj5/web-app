@@ -2,6 +2,4 @@ import sys
 
 sys.path.insert(0, "/var/www/WebRepo")
 
-from app import app
-
-application = app
+from app import app as application

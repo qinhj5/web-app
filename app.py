@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 import json
+import os
 from flask import Flask
 from models import db
 
@@ -11,7 +12,9 @@ def get_config(config_path=None):
 
 
 def create_app():
-    conf = get_config(config_path="config.json")
+    current_directory = os.getcwd()
+    config_path = os.path.join(current_directory, "config.json")
+    conf = get_config(config_path=config_path)
 
     flask_app = Flask(__name__)
     flask_app.config["SECRET_KEY"] = conf.get("SECRET_KEY")
