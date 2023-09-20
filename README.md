@@ -1,11 +1,10 @@
 ***
 
-<div style="text-align:center;">
-  <a href="https://www.google.com">Visit My Github</a>
-</div>
-<br>
-<div style="text-align:center;">
-  <a href="https://www.google.com">Visit My CSDN</a>
-</div>
+<p align="center">
+  <a href="https://github.com/qinhj5">Visit My Github</a>
+</p>
+<p align="center">
+  <a href="https://blog.csdn.net/embracestar">Visit My CSDN</a>
+</p>
 
 ***
