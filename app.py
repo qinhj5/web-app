@@ -22,11 +22,14 @@ def create_app():
     db_uri = f"""mysql://{db_conf.get("user")}:{db_conf.get("pwd")}@{db_conf.get("ip")}/{db_conf.get("db")}"""
     flask_app.config["SQLALCHEMY_DATABASE_URI"] = db_uri
 
-    from routes.home import home
-    flask_app.register_blueprint(home)
+    from routes.home import home_bp
+    flask_app.register_blueprint(home_bp)
 
-    from routes.about import about
-    flask_app.register_blueprint(about)
+    from routes.about import about_bp
+    flask_app.register_blueprint(about_bp)
+
+    from routes.favicon import favicon_bp
+    flask_app.register_blueprint(favicon_bp)
 
     db.init_app(flask_app)
 
