@@ -5,27 +5,30 @@ from models import db
 from models.user_tab import init_users
 
 
-def db_operation(func=None):
+def db_operation(option=None):
+    if not option:
+        return 
+    
     with app.app_context():
-        if func == "create":
+        if option == "create":
             db.create_all()
             print("created.")
-        elif func == "drop":
+        elif option == "drop":
             db.drop_all()
             print("dropped.")
-        elif func == "recreate":
+        elif option == "recreate":
             db.drop_all()
             db.create_all()
             print("recreated.")
-        elif func == "init_users":
+        elif option == "init_users":
             init_users()
             print("initialized.")
         else:
-            print(f"{func} not found.")
+            print(f"option {option} not found.")
 
 
-if __name__ == '__main__':
-    parser = argparse.ArgumentParser(description='db operation')
-    parser.add_argument('-f', '--func', help='function: create/drop/recreate/init_users', required=True)
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description="db operation")
+    parser.add_argument("-o", "--option", help="options: create/drop/recreate/init_users", required=True)
     args = parser.parse_args()
-    db_operation(func=args.func)
+    db_operation(option=args.option)
