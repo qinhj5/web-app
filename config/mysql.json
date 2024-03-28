@@ -1,0 +1,10 @@
+{
+  "SECRET_KEY": "ZXNzX3Rva2Vu",
+  "SQLALCHEMY_DATABASE": {
+    "ip": "localhost",
+    "port": 3306,
+    "user": "web_app",
+    "password": "web_app.123@abc",
+    "db": "web_app_db"
+  }
+}
