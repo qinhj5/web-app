@@ -1,35 +1,33 @@
 # -*- coding: utf-8 -*-
-import json
 import os
-from flask import Flask
+import json
 from models import db
-
-
-def get_config(config_path=None):
-    with open(config_path) as f:
-        config = json.load(f)
-        return config
+from flask import Flask
 
 
 def create_app():
-    current_directory = os.getcwd()
-    config_path = os.path.join(current_directory, "config.json")
-    conf = get_config(config_path=config_path)
-
+    root_dir = os.path.abspath(os.path.dirname(__file__))
     flask_app = Flask(__name__)
-    flask_app.config["SECRET_KEY"] = conf.get("SECRET_KEY")
-    db_conf = conf.get("SQLALCHEMY_DATABASE")
-    db_uri = f"""mysql://{db_conf.get("user")}:{db_conf.get("pwd")}@{db_conf.get("ip")}/{db_conf.get("db")}"""
-    flask_app.config["SQLALCHEMY_DATABASE_URI"] = db_uri
+
+    mysql_config_path = os.path.abspath(os.path.join(root_dir, "config/mysql.json"))
+    with open(mysql_config_path) as f:
+        mysql_config = json.load(f)
+
+    mysql_user = mysql_config.get("user")
+    mysql_password = mysql_config.get("password")
+    mysql_host = mysql_config.get("host")
+    mysql_database = mysql_config.get("database")
+    mysql_uri = f"""mysql://{mysql_user}:{mysql_password}@{mysql_host}/{mysql_database}"""
+    flask_app.config["SQLALCHEMY_DATABASE_URI"] = mysql_uri
+
+    secret_config_path = os.path.abspath(os.path.join(root_dir, "config/secret.json"))
+    with open(secret_config_path) as f:
+        secret_config = json.load(f)
+
+    flask_app.config["SECRET_KEY"] = secret_config.get("key")
 
     from routes.home import home_bp
     flask_app.register_blueprint(home_bp)
-
-    from routes.about import about_bp
-    flask_app.register_blueprint(about_bp)
-
-    from routes.favicon import favicon_bp
-    flask_app.register_blueprint(favicon_bp)
 
     db.init_app(flask_app)
 
