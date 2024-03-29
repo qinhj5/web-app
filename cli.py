@@ -5,10 +5,8 @@ from models import db
 from models.user_tab import init_users
 
 
-def db_operation(option=None):
-    if not option:
-        return 
-    
+def db_operation(option):
+
     with app.app_context():
         if option == "create":
             db.create_all()
