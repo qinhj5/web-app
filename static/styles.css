@@ -1,0 +1,51 @@
+body {
+    background-color: lightgray;
+}
+
+.main-container {
+    width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: white;
+}
+
+h1 {
+    text-align: center;
+}
+
+.table-container {
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    border: 1px solid gray;
+    padding: 8px;
+}
+
+.login-container {
+    width: 180px;
+    height: 40px;
+    position: relative;
+    text-align: center;
+}
+
+.text {
+    position: absolute;
+    top: 50%;
+    left: 15px;
+    transform: translateY(-50%);
+}
+
+.button {
+    position: absolute;
+    height: 25px;
+    top: 50%;
+    right: 15px;
+    transform: translateY(-50%);
+}
