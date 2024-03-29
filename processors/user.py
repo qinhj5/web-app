@@ -3,6 +3,7 @@ import os
 import json
 import time
 import traceback
+from flask import current_app
 from google.oauth2 import id_token
 from google.auth.transport import requests
 from models.user_tab import get_users, get_user_by_user_id, add, update
@@ -31,7 +32,8 @@ def verify_credential(credential, user_info):
     try:
         parsed_info = id_token.verify_oauth2_token(credential, requests.Request(), client_id)
     except Exception as e:
-        print(f"{e}\n{traceback.format_exc()}")
+        current_app.logger.warning("verify oauth2 token failed.")
+        current_app.logger.error(f"{e}\n{traceback.format_exc()}")
         return False
     else:
         parsed_user_info = {"user_id": parsed_info.get("sub"),
@@ -49,5 +51,7 @@ def login_user(user_info):
     user = get_user_by_user_id(user_info["user_id"])
     if user:
         update(user_info)
+        current_app.logger.info(f"""update user info ({user_info["user_id"]}).""")
     else:
         add(user_info)
+        current_app.logger.info(f"""add user info ({user_info["user_id"]}).""")
