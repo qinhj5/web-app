@@ -3,6 +3,7 @@ colorama==0.4.6
 cryptography==42.0.5
 Flask==2.2.5
 flask-sqlalchemy==3.0.5
+google-auth-oauthlib==1.2.0
 greenlet==2.0.2
 importlib-metadata==6.7.0
 itsdangerous==2.1.2
