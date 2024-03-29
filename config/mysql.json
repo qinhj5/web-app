@@ -1,7 +1,7 @@
 {
   "host": "localhost",
   "port": 3306,
-  "user": "web_app",
-  "password": "web_app.123!abc",
-  "database": "web_app_db"
+  "user": "",
+  "password": "",
+  "database": ""
 }
