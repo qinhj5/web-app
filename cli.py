@@ -20,7 +20,7 @@ def db_operation(option=None):
             db.drop_all()
             db.create_all()
             print("recreated.")
-        elif option == "init_users":
+        elif option == "initialize":
             init_users()
             print("initialized.")
         else:
@@ -29,6 +29,6 @@ def db_operation(option=None):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="db operation")
-    parser.add_argument("-o", "--option", help="options: create/drop/recreate/init_users", required=True)
+    parser.add_argument("-o", "--option", help="options: create/drop/recreate/initialize", required=True)
     args = parser.parse_args()
     db_operation(option=args.option)
