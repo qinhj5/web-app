@@ -2,6 +2,7 @@
 import time
 import traceback
 from models import db
+from flask import current_app
 from sqlalchemy.dialects.mysql import INTEGER, BIGINT, VARCHAR, TEXT, TINYINT
 
 
@@ -36,7 +37,7 @@ def add(user_info):
     try:
         db.session.add(UserTab(**user_info))
     except Exception as e:
-        print(f"{e}\n{traceback.format_exc()}")
+        current_app.logger.error(f"{e}\n{traceback.format_exc()}")
         db.session.rollback()
     else:
         db.session.commit()
@@ -48,7 +49,7 @@ def update(user_info):
     try:
         UserTab.query.filter(UserTab.user_id == user_info["user_id"]).update(user_info)
     except Exception as e:
-        print(f"{e}\n{traceback.format_exc()}")
+        current_app.logger.error(f"{e}\n{traceback.format_exc()}")
         db.session.rollback()
     else:
         db.session.commit()
@@ -58,10 +59,23 @@ def get_user_by_user_id(user_id):
     try:
         user = UserTab.query.filter(UserTab.user_id == user_id).first()
     except Exception as e:
-        print(f"{e}\n{traceback.format_exc()}")
+        current_app.logger.error(f"{e}\n{traceback.format_exc()}")
         return None
     else:
         return user.to_dict() if user else None
+
+
+def get_users(page=1, size=0):
+    try:
+        if not size:
+            users = UserTab.query.order_by(UserTab.id.desc()).all()
+        else:
+            users = UserTab.query.order_by(UserTab.id.desc()).paginate(page=page, per_page=size).items
+    except Exception as e:
+        current_app.logger.error(f"{e}\n{traceback.format_exc()}")
+        return []
+    else:
+        return [user.to_dict() for user in users]
 
 
 def init_users():
@@ -81,16 +95,3 @@ def init_users():
     ]
     for user in user_list:
         add(user)
-
-
-def get_users(page=1, size=0):
-    try:
-        if not size:
-            users = UserTab.query.order_by(UserTab.id.desc()).all()
-        else:
-            users = UserTab.query.order_by(UserTab.id.desc()).paginate(page=page, per_page=size).items
-    except Exception as e:
-        print(f"{e}\n{traceback.format_exc()}")
-        return []
-    else:
-        return [user.to_dict() for user in users]
