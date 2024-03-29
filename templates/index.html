@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>WEB</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    <script src="https://accounts.google.com/gsi/client" async></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</head>
+<body>
+    <div class="main-container">
+        <h1>Members</h1>
+        <div class="login-container">
+            <div id="render_button"></div>
+            <span id="user_name" class="text"></span>
+            <button id="logout_button" class="button" onclick="onClickLogout()" style="display: none;">Logout</button>
+        </div>
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                    </tr>
+                </thead>
+                <tbody id="table_body">
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <p><a href="https://github.com/qinhj5/WebRepo">Github</a> | <a href="https://blog.csdn.net/embracestar">CSDN</a></p>
+</body>
+</html>
