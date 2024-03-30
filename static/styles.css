@@ -1,20 +1,32 @@
 body {
-    background-color: lightgray;
+    background-color: #FEFDED;
 }
 
 .main-container {
     width: 600px;
-    margin: 0 auto;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 100px;
     padding: 20px;
-    background-color: white;
+    background-color: #DFF5FF;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.flex-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 h1 {
-    text-align: center;
+    text-align: left;
+    margin-left: 5px;
 }
 
 .table-container {
-    max-height: 300px;
+    max-height: 440px;
     overflow-y: auto;
 }
 
@@ -33,6 +45,7 @@ th, td {
     height: 40px;
     position: relative;
     text-align: center;
+    margin-right: 15px;
 }
 
 .text {
@@ -44,8 +57,22 @@ th, td {
 
 .button {
     position: absolute;
-    height: 25px;
+    height: 30px;
     top: 50%;
     right: 15px;
     transform: translateY(-50%);
+    padding: 0 5px;
+    background-color: #fff;
+    color: black;
+    border: 1px solid #737373;
+    border-radius: 5px;
+    font-size: 14px;
+    line-height: 30px;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+}
+
+.center {
+    text-align: center;
 }
