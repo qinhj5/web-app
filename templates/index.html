@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>WEB</title>
+    <title>Join Us</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
     <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
     <script src="https://accounts.google.com/gsi/client" async></script>
@@ -10,11 +10,13 @@
 </head>
 <body>
     <div class="main-container">
-        <h1>Members</h1>
-        <div class="login-container">
-            <div id="render_button"></div>
-            <span id="user_name" class="text"></span>
-            <button id="logout_button" class="button" onclick="onClickLogout()" style="display: none;">Logout</button>
+        <div class="flex-container">
+            <h1>Members</h1>
+            <div class="login-container">
+                <div id="render_button"></div>
+                <span id="user_name" class="text"></span>
+                <button id="logout_button" class="button" onclick="onClickLogout()" style="display: none;">Logout</button>
+            </div>
         </div>
         <div class="table-container">
             <table>
@@ -28,7 +30,8 @@
                 </tbody>
             </table>
         </div>
+        <br/>
+        <p class="center"><a href="https://github.com/qinhj5/WebRepo">GitHub</a> | <a href="https://blog.csdn.net/embracestar">CSDN</a></p>
     </div>
-    <p><a href="https://github.com/qinhj5/WebRepo">Github</a> | <a href="https://blog.csdn.net/embracestar">CSDN</a></p>
 </body>
 </html>
