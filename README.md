@@ -55,34 +55,14 @@ WebRepo/
 <br/>
 
 ## 四、使用教程
-（Ubuntu 20.04 LTS x64, Python3.8）
 
-### 1.安装工具
-```
-  sudo apt update
-  sudo apt install -y python3.8 virtualenv git default-jdk
-```
-### 2.克隆仓库
-```
-  git clone https://github.com/qinhj5/WebRepo.git
-  cd WebRepo
-```
-### 3.安装依赖
-```
-  virtualenv --python=python3.8 venv
-  source venv/bin/activate
-  pip3.8 install -r requirements.txt
-```
-### 4.执行测试
-```
-  python3.8 debug.py
-```
+<p>参考文章: <a href="https://blog.csdn.net/embracestar/article/details/132919569">《Apache+Flask在云服务器搭建个人网站》</a></p>
 
 <br/>
 
 ---
 
 <p align="center">有错误或者改进的地方请各位积极指出！</p>
-<p align="center"><a href="https://github.com/qinhj5/WebRepo">GitHub</a> | <a href="https://blog.csdn.net/embracestar">CSDN</a></p>
+<p align="center"><a href="https://github.com/qinhj5">GitHub</a> | <a href="https://blog.csdn.net/embracestar">CSDN</a></p>
 
 ---
