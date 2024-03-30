@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from flask_cors import cross_origin
 from flask import Blueprint, render_template, request, jsonify
 from processors.user import verify_credential, is_credential_valid, login_user, get_user_list
 
@@ -11,6 +12,7 @@ def index():
 
 
 @home_bp.route("/status", methods=["POST"])
+@cross_origin()
 def status():
     authorization = request.headers.get("Authorization")
     credential = authorization.split(" ")[-1]
@@ -24,6 +26,7 @@ def status():
 
 
 @home_bp.route("/login", methods=["POST"])
+@cross_origin()
 def login():
     authorization = request.headers.get("Authorization")
     credential = authorization.split(" ")[-1]
