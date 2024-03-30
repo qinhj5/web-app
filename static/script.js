@@ -1,6 +1,6 @@
 window.onload = function () {
     google.accounts.id.initialize({
-        client_id: "356901971367-h22g9eks5kr5lh09hdulnk5cdse410vl.apps.googleusercontent.com",
+        client_id: "",
         callback: onLoginCallback
     });
 
