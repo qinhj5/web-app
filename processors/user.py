@@ -16,7 +16,7 @@ def get_user_list():
 
 def is_credential_valid(user_id):
     user = get_user_by_user_id(user_id)
-    if round(time.time() * 1000) > user["expire_time"]:
+    if not user or round(time.time() * 1000) > user["expire_time"]:
         return False
     return True
 
