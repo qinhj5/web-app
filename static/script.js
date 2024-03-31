@@ -1,6 +1,6 @@
 window.onload = function () {
     google.accounts.id.initialize({
-        client_id: "",
+        client_id: "356901971367-h22g9eks5kr5lh09hdulnk5cdse410vl.apps.googleusercontent.com",
         callback: onLoginCallback
     });
 
@@ -78,11 +78,6 @@ function displayLogout() {
 };
 
 function onClickLogout() {
-    var user_id = localStorage.getItem("user_id");
-    google.accounts.id.revoke(user_id, done => {
-        console.log(done.error);
-    });
-
     localStorage.removeItem("user_id");
     localStorage.removeItem("name");
     localStorage.removeItem("email");
