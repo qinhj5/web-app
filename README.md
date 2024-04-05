@@ -56,6 +56,7 @@ web-app/
 
 ## 四、使用教程
 
+虚拟环境: Python 3.7
 <p>参考文章: <a href="https://blog.csdn.net/embracestar/article/details/132919569">《Apache+Flask在云服务器搭建个人网站》</a></p>
 
 <br/>
