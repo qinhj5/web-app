@@ -1,4 +1,4 @@
-# WebRepo示例网站
+# web-app示例网站
 
 ---
 
@@ -24,7 +24,7 @@
 ## 三、目录结构
 
 ```
-WebRepo/
+web-app/
 ├── config/
 │   ├── client.json
 │   ├── mysql.json
