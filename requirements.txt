@@ -1,6 +1,7 @@
 click==8.1.7
 colorama==0.4.6
 cryptography==42.0.5
+flasgger==0.9.7.1
 Flask==2.2.5
 flask-cors==4.0.0
 flask-sqlalchemy==3.0.5

@@ -14,6 +14,34 @@ def index():
 @home_bp.route("/status", methods=["POST"])
 @cross_origin()
 def status():
+    """
+    Check user status.
+    ---
+    parameters:
+      - name: Authorization
+        in: header
+        type: string
+        required: true
+        description: Bearer token for user authentication.
+      - name: user_info
+        in: body
+        type: object
+        required: true
+        description: User information.
+        schema:
+          type: object
+          properties:
+            user_id:
+              type: string
+    responses:
+      200:
+        description: User status response.
+        schema:
+          type: object
+          properties:
+            is_valid:
+              type: boolean
+    """
     authorization = request.headers.get("Authorization")
     credential = authorization.split(" ")[-1]
     user_info = request.get_json()
@@ -28,6 +56,34 @@ def status():
 @home_bp.route("/login", methods=["POST"])
 @cross_origin()
 def login():
+    """
+    User login.
+    ---
+    parameters:
+      - name: Authorization
+        in: header
+        type: string
+        required: true
+        description: Bearer token for user authentication.
+      - name: user_info
+        in: body
+        type: object
+        required: true
+        description: User information.
+        schema:
+          type: object
+          properties:
+            user_id:
+              type: string
+    responses:
+      200:
+        description: Login response.
+        schema:
+          type: object
+          properties:
+            is_login:
+              type: boolean
+    """
     authorization = request.headers.get("Authorization")
     credential = authorization.split(" ")[-1]
     user_info = request.get_json()
@@ -42,5 +98,24 @@ def login():
 
 @home_bp.route("/users", methods=["GET"])
 def users():
+    """
+    Get user list.
+    ---
+    responses:
+      200:
+        description: User list response.
+        schema:
+          type: object
+          properties:
+            users:
+              type: array
+              items:
+                type: object
+                properties:
+                  username:
+                    type: string
+                  email:
+                    type: string
+    """
     user_list = get_user_list()
     return jsonify(user_list)

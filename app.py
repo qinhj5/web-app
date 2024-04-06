@@ -4,13 +4,12 @@ import json
 from models import db
 from flask import Flask
 from flask_cors import CORS
+from flasgger import Swagger
 
 
 def create_app():
     root_dir = os.path.abspath(os.path.dirname(__file__))
     flask_app = Flask(__name__)
-    CORS(flask_app)
-    flask_app.config["CORS_HEADERS"] = "Authorization"
 
     mysql_config_path = os.path.abspath(os.path.join(root_dir, "config/mysql.json"))
     with open(mysql_config_path) as f:
@@ -33,6 +32,24 @@ def create_app():
     flask_app.register_blueprint(home_bp)
 
     db.init_app(flask_app)
+
+    flask_app.config["CORS_HEADERS"] = "Authorization"
+    CORS(flask_app)
+
+    swagger_config = Swagger.DEFAULT_CONFIG
+    swagger_config["title"] = "web-app API"
+    swagger_config["version"] = "1.0"
+    swagger_config["description"] = "[Tutorial](https://blog.csdn.net/embracestar/article/details/132919569)"
+    swagger_config["termsOfService"] = "https://github.com/qinhjs/web-app"
+    swagger_config["specs"] = [
+        {
+            "endpoint": "apispec",
+            "route": "/apispec.json",
+            "rule_filter": lambda rule: True,
+            "model_filter": lambda tag: True,
+        }
+    ]
+    Swagger(flask_app, config=swagger_config)
 
     return flask_app
 
