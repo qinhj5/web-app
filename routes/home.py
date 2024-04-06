@@ -17,6 +17,8 @@ def status():
     """
     Check user status.
     ---
+    tags:
+      - Home
     parameters:
       - name: Authorization
         in: header
@@ -59,6 +61,8 @@ def login():
     """
     User login.
     ---
+    tags:
+      - Home
     parameters:
       - name: Authorization
         in: header
@@ -101,6 +105,8 @@ def users():
     """
     Get user list.
     ---
+    tags:
+      - Home
     responses:
       200:
         description: User list response.

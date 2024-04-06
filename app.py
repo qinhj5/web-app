@@ -37,16 +37,24 @@ def create_app():
     CORS(flask_app)
 
     swagger_config = Swagger.DEFAULT_CONFIG
-    swagger_config["title"] = "web-app API"
+    swagger_config["title"] = "WEB APP API"
     swagger_config["version"] = "1.0"
     swagger_config["description"] = "[Tutorial](https://blog.csdn.net/embracestar/article/details/132919569)"
-    swagger_config["termsOfService"] = "https://github.com/qinhjs/web-app"
+    swagger_config["termsOfService"] = "https://github.com/qinhj5/web-app"
     swagger_config["specs"] = [
         {
             "endpoint": "apispec",
             "route": "/apispec.json",
             "rule_filter": lambda rule: True,
             "model_filter": lambda tag: True,
+            "options": {
+                "tags": [
+                    {
+                        "name": "Home",
+                        "description": "Operations related to home page"
+                    }
+                ]
+            }
         }
     ]
     Swagger(flask_app, config=swagger_config)
