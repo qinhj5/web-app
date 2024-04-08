@@ -1,9 +1,11 @@
 window.onload = function () {
     google.accounts.id.initialize({
-        client_id: "356901971367-h22g9eks5kr5lh09hdulnk5cdse410vl.apps.googleusercontent.com",
+        client_id: "",
         callback: onLoginCallback
     });
-
+    
+    var csrf_token = document.querySelector("meta[name='csrf-token']").getAttribute("content");
+    
     var credential = localStorage.getItem("credential");
     if (credential === null) {
         displayLogin();
@@ -15,7 +17,8 @@ window.onload = function () {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
-                "Authorization": "Bearer " + credential
+                "Authorization": "Bearer " + credential,
+                "X-CSRFToken": csrf_token
             },
             body: JSON.stringify(
                 {
@@ -91,11 +94,14 @@ function onLoginCallback(response) {
         sub_credential = credential.split(".")[1].replace(/-/g, "+").replace(/_/g, "/"),
         profile = JSON.parse(decodeURIComponent(escape(window.atob(sub_credential))));
 
+    var csrf_token = document.querySelector("meta[name='csrf-token']").getAttribute("content");
+
     fetch("/login", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
-            "Authorization": "Bearer " + credential
+            "Authorization": "Bearer " + credential,
+            "X-CSRFToken": csrf_token
         },
         body: JSON.stringify(
             {
