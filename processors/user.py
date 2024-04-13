@@ -32,8 +32,7 @@ def verify_credential(credential, user_info):
     try:
         parsed_info = id_token.verify_oauth2_token(credential, requests.Request(), client_id)
     except Exception as e:
-        current_app.logger.warning("verify oauth2 token failed.")
-        current_app.logger.error(f"{e}\n{traceback.format_exc()}")
+        current_app.logger.warning(f"verify oauth2 token failed, error: {e}")
         return False
     else:
         parsed_user_info = {"user_id": parsed_info.get("sub"),
