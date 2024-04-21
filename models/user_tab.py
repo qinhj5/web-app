@@ -1,9 +1,11 @@
 # -*- coding: utf-8 -*-
 import time
 import traceback
-from models import db
+
 from flask import current_app
-from sqlalchemy.dialects.mysql import INTEGER, BIGINT, VARCHAR, TEXT, TINYINT
+from sqlalchemy.dialects.mysql import BIGINT, INTEGER, TEXT, TINYINT, VARCHAR
+
+from models import db
 
 
 class UserTab(db.Model):
@@ -15,7 +17,9 @@ class UserTab(db.Model):
     create_time = db.Column(BIGINT(unsigned=True), nullable=False)
     update_time = db.Column(BIGINT(unsigned=True), nullable=False)
     expire_time = db.Column(BIGINT(unsigned=True), nullable=False)
-    is_valid = db.Column(TINYINT(display_width=1, unsigned=True), nullable=False, default=1)
+    is_valid = db.Column(
+        TINYINT(display_width=1, unsigned=True), nullable=False, default=1
+    )
 
     def __repr__(self):
         return f"<User(id={self.id}, user_id={self.user_id}, name={self.name}, email={self.email})>"
@@ -53,7 +57,7 @@ def update(user_info):
         db.session.rollback()
     else:
         db.session.commit()
-        
+
 
 def get_user_by_user_id(user_id):
     try:
@@ -70,7 +74,11 @@ def get_users(page=1, size=0):
         if not size:
             users = UserTab.query.order_by(UserTab.id.desc()).all()
         else:
-            users = UserTab.query.order_by(UserTab.id.desc()).paginate(page=page, per_page=size).items
+            users = (
+                UserTab.query.order_by(UserTab.id.desc())
+                .paginate(page=page, per_page=size)
+                .items
+            )
     except Exception as e:
         current_app.logger.error(f"{e}\n{traceback.format_exc()}")
         return []
@@ -80,18 +88,78 @@ def get_users(page=1, size=0):
 
 def init_users():
     user_list = [
-        {"user_id": "1", "name": "Pony Ma", "email": "pony.ma@gmail.com", "credential": "credential.1"},
-        {"user_id": "2", "name": "Jack Ma", "email": "jack.ma@gmail.com", "credential": "credential.2"},
-        {"user_id": "3", "name": "Stephen Chow", "email": "stephen.chow@gmail.com", "credential": "credential.3"},
-        {"user_id": "4", "name": "Elon Musk", "email": "elon.musk@gmail.com", "credential": "credential.4"},
-        {"user_id": "5", "name": "Allen Walker", "email": "allen.walker@gmail.com", "credential": "credential.5"},
-        {"user_id": "6", "name": "Michael Jackson", "email": "michael.jackson@gmail.com", "credential": "credential.6"},
-        {"user_id": "7", "name": "Albert Einstein", "email": "albert.einstein@gmail.com", "credential": "credential.7"},
-        {"user_id": "8", "name": "Steve Jobs", "email": "steve.jobs@gmail.com", "credential": "credential.8"},
-        {"user_id": "9", "name": "Nelson Mandela", "email": "nelson.mandela@gmail.com", "credential": "credential.9"},
-        {"user_id": "10", "name": "Marie Curie", "email": "marie.curie@gmail.com", "credential": "credential.10"},
-        {"user_id": "11", "name": "Isaac Newton", "email": "isaac.newton@gmail.com", "credential": "credential.11"},
-        {"user_id": "12", "name": "Nikola Tesla", "email": "nikola.tesla@gmail.com", "credential": "credential.12"},
+        {
+            "user_id": "1",
+            "name": "Pony Ma",
+            "email": "pony.ma@gmail.com",
+            "credential": "credential.1",
+        },
+        {
+            "user_id": "2",
+            "name": "Jack Ma",
+            "email": "jack.ma@gmail.com",
+            "credential": "credential.2",
+        },
+        {
+            "user_id": "3",
+            "name": "Stephen Chow",
+            "email": "stephen.chow@gmail.com",
+            "credential": "credential.3",
+        },
+        {
+            "user_id": "4",
+            "name": "Elon Musk",
+            "email": "elon.musk@gmail.com",
+            "credential": "credential.4",
+        },
+        {
+            "user_id": "5",
+            "name": "Allen Walker",
+            "email": "allen.walker@gmail.com",
+            "credential": "credential.5",
+        },
+        {
+            "user_id": "6",
+            "name": "Michael Jackson",
+            "email": "michael.jackson@gmail.com",
+            "credential": "credential.6",
+        },
+        {
+            "user_id": "7",
+            "name": "Albert Einstein",
+            "email": "albert.einstein@gmail.com",
+            "credential": "credential.7",
+        },
+        {
+            "user_id": "8",
+            "name": "Steve Jobs",
+            "email": "steve.jobs@gmail.com",
+            "credential": "credential.8",
+        },
+        {
+            "user_id": "9",
+            "name": "Nelson Mandela",
+            "email": "nelson.mandela@gmail.com",
+            "credential": "credential.9",
+        },
+        {
+            "user_id": "10",
+            "name": "Marie Curie",
+            "email": "marie.curie@gmail.com",
+            "credential": "credential.10",
+        },
+        {
+            "user_id": "11",
+            "name": "Isaac Newton",
+            "email": "isaac.newton@gmail.com",
+            "credential": "credential.11",
+        },
+        {
+            "user_id": "12",
+            "name": "Nikola Tesla",
+            "email": "nikola.tesla@gmail.com",
+            "credential": "credential.12",
+        },
     ]
     for user in user_list:
         add(user)

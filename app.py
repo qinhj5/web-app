@@ -1,16 +1,19 @@
 # -*- coding: utf-8 -*-
-import os
 import json
-from models import db
+import os
+
+from flasgger import Swagger
 from flask import Flask
 from flask_cors import CORS
-from flasgger import Swagger
 from flask_wtf.csrf import CSRFProtect
+
+from models import db
 
 
 def init_db(flask_app):
-
-    mysql_config_path = os.path.abspath(os.path.join(os.path.abspath(os.path.dirname(__file__)), "config/mysql.json"))
+    mysql_config_path = os.path.abspath(
+        os.path.join(os.path.abspath(os.path.dirname(__file__)), "config/mysql.json")
+    )
     with open(mysql_config_path) as f:
         mysql_config = json.load(f)
 
@@ -18,7 +21,9 @@ def init_db(flask_app):
     mysql_password = mysql_config.get("password")
     mysql_host = mysql_config.get("host")
     mysql_database = mysql_config.get("database")
-    mysql_uri = f"""mysql://{mysql_user}:{mysql_password}@{mysql_host}/{mysql_database}"""
+    mysql_uri = (
+        f"""mysql://{mysql_user}:{mysql_password}@{mysql_host}/{mysql_database}"""
+    )
     flask_app.config["SQLALCHEMY_DATABASE_URI"] = mysql_uri
 
     db.init_app(flask_app)
@@ -27,8 +32,9 @@ def init_db(flask_app):
 
 
 def init_secret(flask_app):
-
-    secret_config_path = os.path.abspath(os.path.join(os.path.abspath(os.path.dirname(__file__)), "config/secret.json"))
+    secret_config_path = os.path.abspath(
+        os.path.join(os.path.abspath(os.path.dirname(__file__)), "config/secret.json")
+    )
     with open(secret_config_path) as f:
         secret_config = json.load(f)
 
@@ -40,7 +46,6 @@ def init_secret(flask_app):
 
 
 def init_cors(flask_app):
-
     flask_app.config["CORS_HEADERS"] = "Authorization"
 
     CORS(flask_app)
@@ -49,7 +54,6 @@ def init_cors(flask_app):
 
 
 def init_swagger(flask_app):
-
     swagger_config = Swagger.DEFAULT_CONFIG
     swagger_config["title"] = "WEB APP API"
     swagger_config["version"] = "1.0"
@@ -60,7 +64,7 @@ def init_swagger(flask_app):
             "endpoint": "apispec",
             "route": "/apispec.json",
             "rule_filter": lambda rule: True,
-            "model_filter": lambda tag: True
+            "model_filter": lambda tag: True,
         }
     ]
     Swagger(flask_app, config=swagger_config)
@@ -69,8 +73,8 @@ def init_swagger(flask_app):
 
 
 def create_app(flask_app):
-
     from routes.home import home_bp
+
     flask_app.register_blueprint(home_bp)
 
     flask_app = init_swagger(init_cors(init_secret(init_db(flask_app))))

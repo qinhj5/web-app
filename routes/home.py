@@ -1,7 +1,12 @@
 # -*- coding: utf-8 -*-
+from flask import Blueprint, jsonify, render_template, request
 from flask_cors import cross_origin
-from flask import Blueprint, render_template, request, jsonify
-from processors.user import verify_credential, is_credential_valid, login_user, get_user_list
+from processors.user import (
+    get_user_list,
+    is_credential_valid,
+    login_user,
+    verify_credential,
+)
 
 home_bp = Blueprint("home", __name__)
 

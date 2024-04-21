@@ -1,12 +1,13 @@
 # -*- coding: utf-8 -*-
-import os
 import json
+import os
 import time
-import traceback
+
 from flask import current_app
-from google.oauth2 import id_token
 from google.auth.transport import requests
-from models.user_tab import get_users, get_user_by_user_id, add, update
+from google.oauth2 import id_token
+
+from models.user_tab import add, get_user_by_user_id, get_users, update
 
 
 def get_user_list():
@@ -24,21 +25,27 @@ def is_credential_valid(user_id):
 def verify_credential(credential, user_info):
     processors_dir = os.path.abspath(os.path.dirname(__file__))
 
-    client_config_path = os.path.abspath(os.path.join(processors_dir, "../config/client.json"))
+    client_config_path = os.path.abspath(
+        os.path.join(processors_dir, "../config/client.json")
+    )
     with open(client_config_path) as f:
         client_config = json.load(f)
 
     client_id = client_config["client_id"]
     try:
-        parsed_info = id_token.verify_oauth2_token(credential, requests.Request(), client_id)
+        parsed_info = id_token.verify_oauth2_token(
+            credential, requests.Request(), client_id
+        )
     except Exception as e:
         current_app.logger.warning(f"verify oauth2 token failed, error: {e}")
         return False
     else:
-        parsed_user_info = {"user_id": parsed_info.get("sub"),
-                            "name": parsed_info.get("name"),
-                            "email": parsed_info.get("email"),
-                            "credential": credential}
+        parsed_user_info = {
+            "user_id": parsed_info.get("sub"),
+            "name": parsed_info.get("name"),
+            "email": parsed_info.get("email"),
+            "credential": credential,
+        }
 
     if parsed_user_info != user_info:
         return False

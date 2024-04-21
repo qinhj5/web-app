@@ -1,12 +1,13 @@
 # -*- coding: utf-8 -*-
 import argparse
+
 from app import app
+
 from models import db
 from models.user_tab import init_users
 
 
 def db_operation(option):
-
     with app.app_context():
         if option == "create":
             db.create_all()
@@ -27,6 +28,8 @@ def db_operation(option):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="db operation")
-    parser.add_argument("-o", "--option", help="options: create/drop/recreate/initialize", required=True)
+    parser.add_argument(
+        "-o", "--option", help="options: create/drop/recreate/initialize", required=True
+    )
     args = parser.parse_args()
     db_operation(option=args.option)
