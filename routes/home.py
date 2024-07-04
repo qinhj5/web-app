@@ -11,7 +11,7 @@ from processors.user import (
 home_bp = Blueprint("home", __name__)
 
 
-@home_bp.route("/")
+@home_bp.route("/", methods=["GET"])
 def index():
     return render_template("index.html")
 
