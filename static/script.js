@@ -5,7 +5,7 @@ window.onload = function () {
     });
     
     var csrf_token = document.querySelector("meta[name='csrf-token']").getAttribute("content");
-    
+
     var credential = localStorage.getItem("credential");
     if (credential === null) {
         displayLogin();
